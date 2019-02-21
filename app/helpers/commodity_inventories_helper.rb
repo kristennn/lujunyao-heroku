@@ -1,0 +1,2 @@
+module CommodityInventoriesHelper
+end

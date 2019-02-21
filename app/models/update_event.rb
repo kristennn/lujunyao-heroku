@@ -1,0 +1,2 @@
+class UpdateEvent < ApplicationRecord
+end
