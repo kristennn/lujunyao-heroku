@@ -56,31 +56,5 @@
  </div>
 
 
-<script type="text/javascript">
-  function toggle_visibility(id) {
-    var e = document.getElementById(id);
-    if(e.style.display == 'block')
-      e.style.display = 'none';
-    else
-      e.style.display = 'block';
-    };
 
-    function selCity(){   
-    var arr = gon.group_name;
-    var selNode = document.getElementById("selid");
-    var subselNode = document.getElementById("subselid");
-    var index = selNode.selectedIndex;
-    var citys = arr[index];
-    subselNode.options.length = 0;
-        firstoption = document.createElement("option");
-        subselNode.appendChild(firstoption);
-    for(var i=0; i<citys.length; i++)
-    {
-      var optionNode = document.createElement("option");
-      optionNode.value = citys[i];
-      optionNode.innerText = citys[i];
-      subselNode.appendChild(optionNode);
-    }
-  }
-</script>
 
