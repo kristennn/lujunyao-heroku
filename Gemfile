@@ -27,7 +27,12 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# 登录
 gem 'devise'
+# 角色库
+gem 'rolify'
+# 用户权限
+gem 'cancancan'
 gem 'font-awesome-rails'
 gem 'awesome_rails_console'
 gem 'jquery-rails'
