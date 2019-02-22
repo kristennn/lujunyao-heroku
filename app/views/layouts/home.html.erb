@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>卢钧窑管理平台</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+      <%= render 'common/navbar'%>
+    <div class="mainpanel">
+      <%= render 'common/headbar'%>
+      <%= render "common/flashes"%>
+      <%= yield %>
+    </div>
+
+  </body>
+</html>
