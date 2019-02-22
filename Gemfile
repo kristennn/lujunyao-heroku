@@ -38,6 +38,7 @@ gem 'awesome_rails_console'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'
+gem 'pry'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

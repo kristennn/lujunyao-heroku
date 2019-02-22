@@ -12,6 +12,33 @@
     <div class="content-body"> 
       <div class="content-table" style="clear:both;">
         <table>
+          <thead>
+            <tr>
+              <th>商品编码</th>
+              <th>商品名称</th>
+              <th>计量单位</th>
+              <th>规格型号</th>
+              <th>当前库存</th>
+              <th>操作</th>
+              <th>出入库记录</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @commodities.each do |commodity| %>
+              <% if CommodityInventory.where(commodity_id: commodity.id).present? %>
+                <% commodity_inventories = CommodityInventory.where(commodity_id: commodity.id) %>
+                <tr>
+                  <td><%= commodity.commodity_code %></td>
+                  <td><%= commodity.name %></td>
+                  <td><%= commodity.unit %></td>
+                  <td><%= commodity.standart %></td>
+                  <td><%= commodity_inventories.order("created_at DESC").first.current_inventory  %></td>
+                  <td><%= link_to("入库", "#",class:"btn btn-primary btn-xs") %></td>
+                  <td><%= link_to("查看记录", commodity_inventory_path(commodity.id),class:"btn btn-primary btn-xs") %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
         </table>      
       </div>
     </div>

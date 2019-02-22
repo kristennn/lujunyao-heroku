@@ -1,0 +1,58 @@
+<div id="preloader">
+  <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<div class="contentpanel">
+  <div class="panel panel-body">
+    <header style="text-align: center">
+      <h4>货品出入库记录</h4>
+    </header>
+
+    <div class="content-body">
+      <span style="display:inline-block;">
+        <%= link_to("查看入库记录", "#",class:"btn btn-primary-upload pull-right") %>
+        <%= link_to("查看出库记录", "#",class:"btn btn-primary-upload pull-right") %>
+      </span> 
+      <div class="content-table" style="clear:both;">
+        <table>
+          <thead>
+            <tr>
+              <th>商品编码</th>
+              <th>商品名称</th>
+              <th>计量单位</th>
+              <th>规格型号</th>
+              <th>操作类型</th>
+              <th>操作数量</th>
+              <th>剩余库存</th>
+              <th>经办人</th>
+              <th>时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% if CommodityInventory.where(commodity_id: @commodity.id).present? %>
+                <% commodity_inventories = CommodityInventory.where(commodity_id: @commodity.id) %>
+                <% commodity_inventories.each do |commodity_inventory| %>
+                  <tr>
+                    <td><%= @commodity.commodity_code %></td>
+                    <td><%= @commodity.name %></td>
+                    <td><%= @commodity.unit %></td>
+                    <td><%= @commodity.standart %></td>
+                    <% inventory_hash = {true => "入库", false => "出库"} %>
+                    <td><%= inventory_hash[commodity_inventory.operate_type] %></td>
+                    <td><%= commodity_inventory.quantity %><%= @commodity.unit %></td>
+                    <td><%= commodity_inventory.current_inventory %></td>
+                    <td><%= commodity_inventory.operator %></td>
+                    <td><%= commodity_inventory.created_at.to_datetime.strftime("%Y年%m月%d日%H时%M分") %></td>
+                    <td><%= link_to("修改", "#",class:"btn btn-primary btn-xs") %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+          </tbody>
+        </table>      
+      </div>
+    </div>
+  </div>
+ </div>
+
+
+
