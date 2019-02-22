@@ -1,0 +1,61 @@
+<div id="preloader">
+  <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<div class="contentpanel">
+  <div class="panel panel-body">
+    <header style="text-align: center">
+      <h4>货品列表</h4>
+    </header>
+
+    <div class="content-body"> 
+      <div class="panel">
+        <div class="panel-heading" style="background-color: #fff;">
+          <span style="display:inline-block;">
+          </span>
+          <span style="float: right;"> 
+            <%= link_to("导入商品表", "#",class:"btn btn-primary-upload pull-right") %>
+            <%= link_to("新增商品", "#",class:"btn btn-primary-upload pull-right") %>
+          </span>
+        </div>
+      </div>
+      <div class="content-table" style="clear:both;">
+        <table>
+          <thead>
+            <tr>
+              <th>商品编码</th>
+              <th>商品名称</th>
+              <th>商品种类</th>
+              <th>商品种类编码</th>
+              <th>计量单位</th>
+              <th>规格型号</th>
+              <th>进货价</th>
+              <th>销售价</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @commodities.each do |commodity| %>
+              <tr class="row-click-able" data-url="/commodities/<%= commodity.id%>">
+                <td><%= commodity.commodity_code %></td>
+                <td><%= commodity.commodity_type_name %></td>
+                <td><%= commodity.commodity_type_code %></td>
+                <td><%= commodity.name %></td>
+                <td><%= commodity.unit %></td>
+                <td><%= commodity.standard %></td>
+                <td><%= commodity.purchase_price %></td>
+                <td><%= commodity.selling_price %></td>
+                <td>
+                  <%= link_to("修改", "#",class:"btn btn-primary btn-xs") %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>      
+      </div>
+    </div>
+  </div>
+ </div>
+
+
+
+
