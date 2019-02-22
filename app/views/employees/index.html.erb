@@ -1,1 +1,86 @@
-<h4>人员列表页</h4>
+<div id="preloader">
+  <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<div class="contentpanel">
+  <div class="panel panel-body">
+    <header style="text-align: center">
+      <h4>员工列表</h4>
+    </header>
+
+    <div class="content-body"> 
+      <div class="panel">
+        <div class="panel-heading" style="background-color: #fff;">
+          <span style="float: right;"> 
+            <%= link_to("导入人员表", "#",class:"btn btn-primary-upload pull-right") %>
+            <%= link_to("新增人员", "#",class:"btn btn-primary-upload pull-right") %>
+          </span>
+        </div>
+      </div>
+      <div class="content-table" style="clear:both;">
+        <table>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>工号</th>
+              <th>性别</th>
+              <th>年龄</th>
+              <th>工龄</th>
+              <th>工种</th>
+              <th>部门</th>
+              <th>职务</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @employees.each do |employee| %>
+              <tr class="row-click-able" data-url="/employees/<%= employee.id%>">
+                <td><%= employee.name %></td>
+                <td><%= employee.job_number %></td>
+                <% sex_hash = {true => "女", false => "男"} %>
+                <td><%= sex_hash[employee.sex] %></td>
+                <td><%= employee.age %></td>
+                <td><%= employee.working_years %></td>
+                <td><%= employee.worktype %></td>
+                <td><%= employee.department %></td>
+                <td><%= employee.duty %></td>
+                <td>
+                  <%= link_to("修改", "#",class:"btn btn-primary-upload") %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>      
+      </div>
+    </div>
+  </div>
+ </div>
+
+
+<script type="text/javascript">
+  function toggle_visibility(id) {
+    var e = document.getElementById(id);
+    if(e.style.display == 'block')
+      e.style.display = 'none';
+    else
+      e.style.display = 'block';
+    };
+
+    function selCity(){   
+    var arr = gon.group_name;
+    var selNode = document.getElementById("selid");
+    var subselNode = document.getElementById("subselid");
+    var index = selNode.selectedIndex;
+    var citys = arr[index];
+    subselNode.options.length = 0;
+        firstoption = document.createElement("option");
+        subselNode.appendChild(firstoption);
+    for(var i=0; i<citys.length; i++)
+    {
+      var optionNode = document.createElement("option");
+      optionNode.value = citys[i];
+      optionNode.innerText = citys[i];
+      subselNode.appendChild(optionNode);
+    }
+  }
+</script>
+

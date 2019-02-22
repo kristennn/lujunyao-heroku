@@ -3,10 +3,6 @@
     <div class="header-right">
       <ul class="headermenu">
         <li>
-          <% if !current_user %>
-            <li><%= link_to("注册", new_user_registration_path) %> </li>
-            <li><%= link_to("登入", new_user_session_path) %></li>
-          <% else %>
           <div class="btn-group">
             <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
               <%= current_user.name %>
@@ -18,7 +14,6 @@
               <li><%= link_to "退出", destroy_user_session_path, method: :delete %></li>
             </ul>
           </div>
-          <% end %>
         </li>
       </ul>
     </div><!-- header-right -->
