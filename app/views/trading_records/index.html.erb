@@ -1,0 +1,71 @@
+<div id="preloader">
+  <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<div class="contentpanel">
+  <div class="panel panel-body">
+    <header style="text-align: center">
+      <h4>过往交易记录列表</h4>
+    </header>
+
+    <div class="content-body"> 
+      <div class="panel">
+        <div class="panel-heading" style="background-color: #fff;">
+          <span style="display:inline-block;">
+            <%= form_tag "#", method: :get do%>
+              <%= label_tag :"请选择年份和月份：" %>
+              <%= select_tag(:year, options_for_select(Wage.pluck(:year).uniq), {:required => "true"}) %>
+              <%= select_tag(:month, options_for_select(Wage.pluck(:month).uniq), {:required => "true"}) %>
+              <%= submit_tag :筛选 %>
+              <% end %>
+          </span>
+          <span style="float: right;"> 
+          </span>
+        </div>
+      </div>
+      <div class="content-table" style="clear:both;">
+        <table>
+          <thead>
+            <tr>
+              <th>商品名称</th>
+              <th>商品编码</th>
+              <th>员工名称</th>
+              <th>员工工号</th>
+              <th>交易数量</th>
+              <th>原销售价</th>
+              <th>折扣</th>
+              <th>折后价</th>
+              <th>总交易额</th>
+              <th>经办人</th>
+              <th>交易时间</th>
+              <th>操作</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% @trading_records.each do |trading_record| %>
+              <% commodity = Commodity.find(trading_record.commodity_id) %>
+              <% employee = Employee.find(trading_record.employee_id) %>
+              <tr>
+                <td><%= commodity.name %></td>
+                <td><%= commodity.commodity_code %></td>
+                <td><%= employee.name %></td>
+                <td><%= employee.job_number %></td>
+                <td><%= trading_record.quantity %><%= commodity.unit %></td>
+                <td><%= commodity.selling_price %>元</td>
+                <td><%= (trading_record.discount * 100).to_i %>%</td>
+                <td><%= (commodity.selling_price) * (trading_record.discount) %>元</td>
+                <td><%= trading_record.total_amount %></td>
+                <td><%= trading_record.operator %></td>
+                <td><%= trading_record.created_at.to_datetime.strftime("%Y年%m月%d日%H时%M分") %></td>
+                <td><%= link_to("修改", "#",class:"btn btn-primary btn-xs") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>      
+      </div>
+    </div>
+  </div>
+ </div>
+
+
+
+

@@ -1,21 +1,60 @@
-
-
 <div id="preloader">
   <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
 <div class="contentpanel">
   <div class="panel panel-body">
     <header style="text-align: center">
-      <h4>录入交易记录页面</h4>
+      <h4>录入交易记录</h4>
     </header>
 
-    <div class="content-body"> 
+  <div class="content-body"> 
+    <div class="panel">
+      <div class="panel-heading" style="background-color: #fff;">
+        <span style="display:inline-block;">
+          <%= form_tag "#", method: :get do%>
+            <%= label_tag :"请选择商品类型：" %>
+            <%= select_tag(:commodity_type, options_for_select(Commodity.pluck(:commodity_type_name).uniq), {:required => "true"}) %>
+            <%= submit_tag :筛选 %>
+          <% end %>
+        </span>
+        <span style="float: right;"> 
+          <%= link_to("查看过往交易记录", trading_records_path,class:"btn btn-primary-upload pull-right") %>
+        </span>
+      </div>
       <div class="content-table" style="clear:both;">
-        <table>
-        </table>      
+        <%= form_tag trading_records_path, method: :post do %>
+          <table>
+            <thead>
+              <tr>
+                <th>商品编码</th>
+                <th>商品名称</th>
+                <th>计量单位</th>
+                <th>规格型号</th>
+                <th>销售价</th>
+                <th>销售数量</th>
+                <th>员工姓名</th>
+                <th>折扣</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @commodities.each do |commodity| %>
+                <tr>
+                  <td><%= commodity.commodity_code %></td>
+                  <td><%= commodity.name %></td>
+                  <td><%= commodity.unit %></td>
+                  <td><%= commodity.standart %></td>
+                  <td><%= commodity.selling_price %></td>
+                  <td><%= text_field_tag :trading_quantity %><%= commodity.unit %></td>
+                  <td><%= select_tag(:employee_name, options_for_select(@employees.collect{ |u| u.name }), {:prompt => "请选择", :required => "true"})  %></td>
+                  <td><%= text_field_tag :discount %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <br><br><br>
+          <%= submit_tag :确定录入, class: "btn btn-primary-upload pull-right" %>
+        <% end %>      
       </div>
     </div>
   </div>
  </div>
-
-
